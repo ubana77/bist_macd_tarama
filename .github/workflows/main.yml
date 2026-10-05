@@ -1,0 +1,42 @@
+name: BIST MACD Tarama
+
+on:
+  schedule:
+    # 15:35 UTC = 18:35 Türkiye Saati
+    - cron: '35 15 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  tarama:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kodu indir
+        uses: actions/checkout@v4
+
+      - name: Python 3.11 kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Gerekli kutuphaneleri kur
+        run: |
+          python -m pip install --upgrade pip
+          pip install yfinance pandas openpyxl requests
+
+      - name: Tarama scriptini calistir
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python bist_macd_scan.py
+
+      - name: Excel dosyasini sakla
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: BIST-MACD-Tarama-Sonuclari
+          path: "*.xlsx"
+          retention-days: 30
