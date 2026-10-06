@@ -2,7 +2,7 @@ name: BIST MACD Tarama
 
 on:
   schedule:
-    - cron: '35 15 * * 1-5'
+    - cron: '0 16 * * 1-5'
   workflow_dispatch:
 
 permissions:
