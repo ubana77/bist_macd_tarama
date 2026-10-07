@@ -2,6 +2,7 @@ name: BIST MACD Tarama
 
 on:
   workflow_dispatch:
+  
 permissions:
   contents: write
 
