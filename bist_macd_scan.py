@@ -169,24 +169,24 @@ def build_telegram_message(signals, scan_time_str, total_symbols):
     if not signals:
         return (
             f"📊 <b>BIST MACD Zero-Cross Taraması</b>\n"
-            f"⏰ {scan_time_str}\n"
-            f"🔎 Taranan: {total_symbols} hisse\n\n"
-            f"❌ MACD 0 eksenini yukarı kesen hisse bulunamadı."
+            f" {scan_time_str}\n"
+            f" Taranan: {total_symbols} hisse\n\n"
+            f" MACD 0 eksenini yukarı kesen hisse bulunamadı."
         )
     lines = [
         "📊 <b>BIST MACD 0'ı Yukarı Kesenler Taraması</b>",
-        f"⏰ <i>{scan_time_str}</i>",
-        f"🔎 Taranan: {total_symbols} hisse",
-        f"🎯 <b>Bulunan: {len(signals)} hisse</b>",
+        f" <i>{scan_time_str}</i>",
+        f" Taranan: {total_symbols} hisse",
+        f" <b>Bulunan: {len(signals)} hisse</b>",
         "",
         "━━━━━━━━━━━━━━━━━━━━",
     ]
     for s in signals:
         lines.append(
             f"📈 <b>{s['Hisse']}</b>\n"
-            f"   💰 Fiyat: <code>{s['Kapanış Fiyatı']:.2f}</code>\n"
-            f"   🔹 MACD: <code>{s['MACD (Bugün)']:.3f}</code> (Dün: <code>{s['MACD (Dün)']:.3f}</code>)\n"
-            f"   📊 Signal: <code>{s['Signal Line']:.3f}</code>"
+            f"    Fiyat: <code>{s['Kapanış Fiyatı']:.2f}</code>\n"
+            f"    MACD: <code>{s['MACD (Bugün)']:.3f}</code> (Dün: <code>{s['MACD (Dün)']:.3f}</code>)\n"
+            f"    Signal: <code>{s['Signal Line']:.3f}</code>"
         )
     lines.append("━━━━━━━━━━━━━━━━━━━━")
     lines.append("<i>⚠️️ Yatırım tavsiyesi değildir.</i>")
